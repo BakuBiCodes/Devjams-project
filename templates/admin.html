@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PitchDesk - Admin Panel</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-icon">P</div>
+                <h2>PitchDesk</h2>
+            </div>
+
+            <div class="nav-center">
+                <div class="search-container">
+                    <input type="text" placeholder="Search startup ideas..." class="search-input" id="searchInput">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="nav-actions">
+                <button class="btn-post-idea" id="postIdeaBtn">
+                    <span>+</span>
+                    Post Idea
+                </button>
+                <div class="credits-badge">
+                    <span class="credits-count" id="creditsCount">{{ current_user.credits }}</span>
+                    <span class="credits-label">Credits</span>
+                </div>
+                <button class="icon-btn notification-btn" aria-label="Notifications">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9z"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                </button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <div class="profile-menu">
+                    <button class="profile-btn" id="profileBtn">
+                        <div class="profile-avatar">{{ current_user.username[0].upper() }}</div>
+                    </button>
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <div class="profile-header">
+                            <div class="profile-avatar large">{{ current_user.username[0].upper() }}</div>
+                            <div class="profile-info">
+                                <h4>{{ current_user.username }}</h4>
+                                <p>{{ current_user.role.title() }}</p>
+                            </div>
+                        </div>
+                        <div class="profile-menu-items">
+                            <a href="/profile" class="profile-menu-item">My Profile</a>
+                            <a href="/bookmarks" class="profile-menu-item">Bookmarks</a>
+                            <a href="/settings" class="profile-menu-item">Settings</a>
+                            <a href="/admin" class="profile-menu-item admin-only active">Admin Panel</a>
+                            <div class="profile-menu-divider"></div>
+                            <a href="/logout" class="profile-menu-item logout-btn">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Admin Header -->
+    <section class="admin-header">
+        <div class="admin-container">
+            <h1>Admin Dashboard</h1>
+            <p>Manage users, ideas, and platform settings</p>
+        </div>
+    </section>
+
+    <!-- Admin Content -->
+    <main class="admin-content">
+        <div class="admin-container">
+            <!-- Admin Stats -->
+            <div class="admin-stats">
+                <div class="admin-stat-card">
+                    <div class="stat-icon users">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="totalUsers">0</div>
+                        <div class="stat-label">Total Users</div>
+                    </div>
+                </div>
+
+                <div class="admin-stat-card">
+                    <div class="stat-icon ideas">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14.828 14.828a4 4 0 0 1-5.656 0"></path>
+                            <path d="M9 9a3 3 0 1 1 6 0 3 3 0 0 1-6 0"></path>
+                            <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="totalIdeas">0</div>
+                        <div class="stat-label">Total Ideas</div>
+                    </div>
+                </div>
+
+                <div class="admin-stat-card">
+                    <div class="stat-icon pending">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12,6 12,12 16,14"></polyline>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="pendingIdeas">0</div>
+                        <div class="stat-label">Pending Review</div>
+                    </div>
+                </div>
+
+                <div class="admin-stat-card">
+                    <div class="stat-icon verified">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22,4 12,14.01 9,11.01"></polyline>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="verifiedUsers">0</div>
+                        <div class="stat-label">Verified Users</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Tabs -->
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="ideas">Idea Management</button>
+                <button class="admin-tab" data-tab="users">User Management</button>
+                <button class="admin-tab" data-tab="analytics">Analytics</button>
+                <button class="admin-tab" data-tab="settings">Platform Settings</button>
+            </div>
+
+            <!-- Ideas Management Tab -->
+            <div class="admin-tab-content active" id="ideasTab">
+                <div class="admin-section">
+                    <div class="section-header">
+                        <h3>Pending Ideas</h3>
+                        <button class="btn btn-primary">Review All</button>
+                    </div>
+                    <div class="admin-table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Idea</th>
+                                    <th>Author</th>
+                                    <th>Category</th>
+                                    <th>Submitted</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pendingIdeasTable">
+                                <!-- Pending ideas will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="admin-section">
+                    <div class="section-header">
+                        <h3>Recent Ideas</h3>
+                        <button class="btn btn-secondary">View All</button>
+                    </div>
+                    <div class="admin-table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Idea</th>
+                                    <th>Author</th>
+                                    <th>Category</th>
+                                    <th>Upvotes</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentIdeasTable">
+                                <!-- Recent ideas will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Management Tab -->
+            <div class="admin-tab-content" id="usersTab">
+                <div class="admin-section">
+                    <div class="section-header">
+                        <h3>User Management</h3>
+                        <div class="admin-search">
+                            <input type="text" placeholder="Search users..." id="userSearch">
+                        </div>
+                    </div>
+                    <div class="admin-table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Credits</th>
+                                    <th>Joined</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTable">
+                                <!-- Users will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div class="admin-tab-content" id="analyticsTab">
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h4>Ideas by Category</h4>
+                        <div class="chart-placeholder">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="analytics-card">
+                        <h4>User Growth</h4>
+                        <div class="chart-placeholder">
+                            <canvas id="growthChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="analytics-card">
+                        <h4>Top Ideas This Month</h4>
+                        <div class="top-ideas-list">
+                            <div class="top-idea">
+                                <span class="rank">1</span>
+                                <div class="idea-info">
+                                    <h5>Sustainable Energy Management</h5>
+                                    <p>156 upvotes</p>
+                                </div>
+                            </div>
+                            <div class="top-idea">
+                                <span class="rank">2</span>
+                                <div class="idea-info">
+                                    <h5>AI Study Assistant</h5>
+                                    <p>127 upvotes</p>
+                                </div>
+                            </div>
+                            <div class="top-idea">
+                                <span class="rank">3</span>
+                                <div class="idea-info">
+                                    <h5>Mental Health Platform</h5>
+                                    <p>203 upvotes</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="analytics-card">
+                        <h4>Platform Metrics</h4>
+                        <div class="metrics-list">
+                            <div class="metric">
+                                <span class="metric-label">Total Votes Cast</span>
+                                <span class="metric-value" id="totalVotes">0</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Ideas with Internships</span>
+                                <span class="metric-value" id="internshipIdeas">0</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Average Credits/User</span>
+                                <span class="metric-value" id="avgCredits">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div class="admin-tab-content" id="settingsTab">
+                <div class="admin-section">
+                    <h3>Platform Settings</h3>
+                    <form class="settings-form" id="platformSettings">
+                        <div class="form-group">
+                            <label for="startingCredits">Default Starting Credits</label>
+                            <input type="number" id="startingCredits" value="100" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="maxCredits">Maximum Credits Per User</label>
+                            <input type="number" id="maxCredits" value="1000" min="100">
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="allowInternships" checked>
+                                <span class="checkbox-custom"></span>
+                                Allow internship postings
+                            </label>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="requireApproval" checked>
+                                <span class="checkbox-custom"></span>
+                                Require admin approval for ideas
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Settings</button>
+                    </form>
+                </div>
+
+                <div class="admin-section">
+                    <h3>System Maintenance</h3>
+                    <div class="maintenance-actions">
+                        <button class="btn btn-secondary" id="clearCache">Clear Cache</button>
+                        <button class="btn btn-warning" id="resetStats">Reset Statistics</button>
+                        <button class="btn btn-danger" id="systemBackup">Create Backup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../script.js"></script>
+</body>
+</html>
