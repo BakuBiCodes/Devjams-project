@@ -717,6 +717,70 @@ body {
     margin-bottom: var(--spacing-lg);
 }
 
+/* Fix for select elements with white text on white background */
+.theme-select {
+    background-color: var(--dark-card);
+    color: var(--text-primary);
+    border: 1px solid var(--dark-border);
+    position: relative;
+    z-index: 10; /* Ensure dropdown is above other elements */
+}
+
+.theme-select option {
+    background-color: var(--dark-card);
+    color: var(--text-primary);
+}
+
+/* Fix elongated and bugged checkbox for internships */
+.checkbox-label input.custom-checkbox {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    vertical-align: middle;
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: var(--glass-bg);
+    border: 2px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    position: relative;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+.checkbox-label input.custom-checkbox:checked {
+    background-color: var(--frost-blue);
+    border-color: var(--frost-blue);
+}
+
+.checkbox-label input.custom-checkbox:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: var(--font-size-sm);
+    font-weight: bold;
+}
+
+.checkbox-label .checkbox-custom {
+    display: none;
+}
+
+/* Fix profile dropdown overlap with navbar */
+.profile-dropdown {
+    z-index: 1100; /* Higher than navbar z-index 1000 */
+    position: absolute;
+}
+
+/* Fix sort select dropdown clipping */
+#sortSelect {
+    position: relative;
+    z-index: 10;
+}
+
 .idea-card:hover {
     transform: translateY(-2px);
     border-color: var(--frost-blue);
