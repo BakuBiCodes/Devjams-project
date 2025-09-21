@@ -102,7 +102,7 @@ def login():
             return jsonify({'success': True, 'message': 'Login successful'})
         return jsonify({'success': False, 'message': 'Invalid credentials'})
 
-    return render_template('login.html')
+    return render_template('login_fixed.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -164,6 +164,30 @@ def admin():
     return render_template('admin.html')
 
 # API Routes
+@app.route('/api/user')
+@login_required
+def get_user():
+    return jsonify({
+        'id': current_user.id,
+        'username': current_user.username,
+        'email': current_user.email,
+        'role': current_user.role,
+        'credits': current_user.credits,
+        'avatar': current_user.avatar,
+        'bio': current_user.bio,
+        'linkedin': current_user.linkedin,
+        'portfolio_pdf': current_user.portfolio_pdf,
+        'created_at': current_user.created_at.isoformat(),
+        'is_verified': current_user.is_verified
+    })
+
+@app.route('/api/user/bookmarks')
+@login_required
+def get_user_bookmarks():
+    bookmarks = Bookmark.query.filter_by(user_id=current_user.id).all()
+    bookmark_ids = [b.idea_id for b in bookmarks]
+    return jsonify(bookmark_ids)
+
 @app.route('/api/ideas', methods=['GET'])
 @login_required
 def get_ideas():

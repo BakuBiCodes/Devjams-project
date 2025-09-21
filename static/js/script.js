@@ -460,15 +460,19 @@ class PitchDesk {
                                 Apply for Internship
                             </button>
                         ` : ''}
-                        ${idea.isVerified ? `
-                            <button class="action-btn fund" data-action="fund">
-                                💰 Fund Idea
-                            </button>
-                        ` : ''}
+${idea.isVerified ? `
+<div class="razorpay-container" data-idea-id="${idea.id}">
+    <a href="https://rzp.io/rzp/7Aze0ae" target="_blank" class="action-btn" style="text-decoration: none; display: inline-block; padding: 8px 12px; border-radius: 6px; background-color: #528FF0; color: white; font-weight: 500; text-align: center;">
+        💰 Fund this idea
+    </a>
+</div>
+` : ''}
+
                     </div>
                 </div>
             </div>
         `;
+
     }
 
     addIdeaCardListeners() {
@@ -696,8 +700,8 @@ class PitchDesk {
             transform: 'translateX(100%)',
             transition: 'transform 0.3s ease',
             backgroundColor: type === 'success' ? '#10B981' :
-                           type === 'error' ? '#EF4444' :
-                           type === 'warning' ? '#F59E0B' : '#4F46E5'
+                type === 'error' ? '#EF4444' :
+                    type === 'warning' ? '#F59E0B' : '#4F46E5'
         });
 
         document.body.appendChild(notification);
@@ -826,134 +830,3 @@ class PitchDesk {
 document.addEventListener('DOMContentLoaded', () => {
     const app = new PitchDesk();
 });
-
-// Add CSS for notifications and additional styles
-const additionalStyles = `
-    .notification {
-        font-family: var(--font-family);
-        font-size: var(--font-size-sm);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        border-radius: var(--radius-md);
-        backdrop-filter: blur(10px);
-    }
-
-    .internship-banner {
-        background-color: rgba(79, 70, 229, 0.1);
-        border: 1px solid rgba(79, 70, 229, 0.3);
-        border-radius: var(--radius-md);
-        padding: var(--spacing-md);
-        margin: var(--spacing-md) 0;
-    }
-
-    .internship-banner span {
-        font-weight: 600;
-        color: var(--primary-blue);
-        display: block;
-        margin-bottom: var(--spacing-xs);
-    }
-
-    .internship-banner p {
-        font-size: var(--font-size-sm);
-        color: var(--text-secondary);
-        margin: 0;
-    }
-
-    .bookmark-item {
-        padding: var(--spacing-md);
-        border-bottom: 1px solid var(--dark-border);
-    }
-
-    .bookmark-item:last-child {
-        border-bottom: none;
-    }
-
-    .bookmark-item h4 {
-        font-size: var(--font-size-base);
-        font-weight: 600;
-        margin-bottom: var(--spacing-xs);
-        color: var(--text-primary);
-    }
-
-    .bookmark-item p {
-        font-size: var(--font-size-sm);
-        color: var(--text-secondary);
-    }
-
-    .profile-avatar-section {
-        text-align: center;
-        margin-bottom: var(--spacing-lg);
-    }
-
-    .profile-avatar-xl {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, var(--primary-blue), var(--primary-orange));
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: var(--font-size-2xl);
-        font-weight: 600;
-        margin: 0 auto var(--spacing-md);
-    }
-
-    .profile-section {
-        padding: var(--spacing-lg);
-        border: 1px solid var(--dark-border);
-        border-radius: var(--radius-lg);
-        margin-bottom: var(--spacing-lg);
-    }
-
-    .profile-section h3 {
-        font-size: var(--font-size-lg);
-        font-weight: 600;
-        margin-bottom: var(--spacing-lg);
-        color: var(--text-primary);
-    }
-
-    .profile-details {
-        display: grid;
-        gap: var(--spacing-md);
-    }
-
-    .bookmarks-list .empty-state {
-        text-align: center;
-        color: var(--text-secondary);
-        padding: var(--spacing-xl);
-    }
-
-    .action-btn.active {
-        background-color: var(--primary-blue);
-        color: white;
-    }
-
-    .profile-menu-item:hover {
-        background-color: rgba(255, 255, 255, 0.05);
-    }
-
-    .filter-tab {
-        position: relative;
-        overflow: hidden;
-    }
-
-    .filter-tab::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-        transition: left 0.5s;
-    }
-
-    .filter-tab:hover::before {
-        left: 100%;
-    }
-`;
-
-// Inject additional styles
-const styleSheet = document.createElement('style');
-styleSheet.textContent = additionalStyles;
-document.head.appendChild(styleSheet);
