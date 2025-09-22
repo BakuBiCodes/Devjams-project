@@ -269,9 +269,6 @@ class PitchDesk {
             { scale: 1 },
             { scale: 1.05, duration: 0.2, yoyo: true, repeat: 1 }
         );
-
-        // Open the post idea modal
-        this.openPostModal();
     }
 
     scrollToIdeas() {
