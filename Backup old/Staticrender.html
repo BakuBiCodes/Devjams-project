@@ -1,0 +1,3425 @@
+<html lang="en" data-theme="dark" style="scroll-behavior: smooth;"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PitchDesk - Where Startup Ideas Come to Life</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body style="">
+    <style>
+        /* CSS Custom Properties - Liquid Glass Frost Theme */
+:root {
+    /* Colors - Frost Theme */
+    --primary-blue: #4F46E5;
+    --primary-orange: #F97316;
+    --frost-blue: #60A5FA;
+    --frost-purple: #A78BFA;
+    --frost-cyan: #06B6D4;
+
+    /* Glass Backgrounds */
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+    /* Dark Theme */
+    --dark-bg: #0A0E1A;
+    --dark-card: rgba(26, 31, 46, 0.8);
+    --dark-border: rgba(45, 55, 72, 0.3);
+    --text-primary: #FFFFFF;
+    --text-secondary: #A0AEC0;
+    --text-muted: #718096;
+
+    /* Status Colors */
+    --success-green: #10B981;
+    --error-red: #EF4444;
+    --warning-yellow: #F59E0B;
+    --pending-orange: #F97316;
+
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    --spacing-3xl: 4rem;
+
+    /* Border Radius */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+    --radius-3xl: 2rem;
+
+    /* Typography */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+    --font-size-5xl: 3rem;
+
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+
+    /* Glass morphism */
+    --glass-backdrop: blur(20px);
+    --glass-bg-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family);
+    background: var(--dark-bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(96, 165, 250, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(167, 139, 250, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    z-index: 1000;
+    padding: var(--spacing-md) 0;
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-xl);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-xl);
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--glass-bg-gradient);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: var(--font-size-lg);
+    color: white;
+    box-shadow: var(--glass-shadow);
+}
+
+.nav-logo h2 {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.nav-center {
+    flex: 1;
+    max-width: 500px;
+    margin: 0 var(--spacing-xl);
+}
+
+.search-container {
+    position: relative;
+    width: 100%;
+}
+
+.search-input {
+    width: 100%;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-sm) var(--spacing-md);
+    padding-left: 2.5rem;
+    font-size: var(--font-size-sm);
+    color: var(--text-primary);
+    transition: all var(--transition-fast);
+    backdrop-filter: var(--glass-backdrop);
+}
+
+.search-input::placeholder {
+    color: var(--text-muted);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--frost-blue);
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.search-icon {
+    position: absolute;
+    left: var(--spacing-md);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.btn-post-idea {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: linear-gradient(135deg, var(--frost-blue), var(--frost-purple));
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    box-shadow: var(--glass-shadow);
+}
+
+.btn-post-idea:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+}
+
+.btn-post-idea span {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+}
+
+.credits-badge {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xs) var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 50px;
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+.credits-count {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--frost-cyan);
+}
+
+.credits-label {
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+}
+
+.icon-btn {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+.icon-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--text-primary);
+    border-color: var(--frost-blue);
+}
+
+.icon-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.theme-toggle {
+    position: relative;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--text-primary);
+    border-color: var(--frost-blue);
+}
+
+.theme-icon {
+    width: 18px;
+    height: 18px;
+    transition: all var(--transition-fast);
+}
+
+.sun-icon {
+    opacity: 1;
+}
+
+.moon-icon {
+    opacity: 0;
+    position: absolute;
+}
+
+.profile-menu {
+    position: relative;
+}
+
+.profile-btn {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+.profile-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--frost-blue);
+}
+
+.profile-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--frost-blue), var(--frost-purple));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    box-shadow: var(--glass-shadow);
+}
+
+.profile-avatar.large {
+    width: 40px;
+    height: 40px;
+    font-size: var(--font-size-base);
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: calc(100% + var(--spacing-sm));
+    right: 0;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glass-shadow);
+    min-width: 280px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all var(--transition-fast);
+    z-index: 1001;
+    backdrop-filter: var(--glass-backdrop);
+}
+
+.profile-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.profile-header {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.profile-info h4 {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+}
+
+.profile-info p {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.profile-menu-items {
+    padding: var(--spacing-sm) 0;
+}
+
+.profile-menu-item {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: var(--text-primary);
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: var(--font-size-sm);
+    transition: all var(--transition-fast);
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.profile-menu-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.profile-menu-item.active {
+    background: rgba(96, 165, 250, 0.1);
+    color: var(--frost-blue);
+}
+
+.profile-menu-divider {
+    height: 1px;
+    background: var(--glass-border);
+    margin: var(--spacing-sm) 0;
+}
+
+.logout-btn {
+    color: var(--error-red) !important;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg,
+        rgba(96, 165, 250, 0.1) 0%,
+        rgba(167, 139, 250, 0.1) 50%,
+        rgba(6, 182, 212, 0.1) 100%
+    );
+    z-index: -1;
+}
+
+.hero-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at top, rgba(96, 165, 250, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom, rgba(167, 139, 250, 0.15) 0%, transparent 50%);
+}
+
+.hero-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-xl);
+    text-align: center;
+    z-index: 1;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: var(--font-size-sm);
+    color: var(--frost-blue);
+    margin-bottom: var(--spacing-xl);
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+.live-indicator {
+    width: 8px;
+    height: 8px;
+    background: var(--success-green);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.1);
+    }
+}
+
+.hero-title {
+    font-size: var(--font-size-5xl);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: var(--spacing-xl);
+    color: var(--text-primary);
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, var(--frost-blue), var(--frost-purple), var(--frost-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-2xl);
+    line-height: 1.6;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-3xl);
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--frost-blue), var(--frost-purple));
+    color: white;
+    border: 1px solid var(--glass-border);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(96, 165, 250, 0.3);
+}
+
+.btn-secondary {
+    background: var(--glass-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--glass-border);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-3xl);
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--frost-blue);
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+.stat-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.stat-content {
+    text-align: left;
+}
+
+.stat-number {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+/* Main Content */
+.main-content {
+    background: var(--dark-bg);
+    padding: var(--spacing-3xl) 0;
+}
+
+.content-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-xl);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+}
+
+.section-title {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-lg);
+    color: var(--text-primary);
+}
+
+.section-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.content-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.filter-tabs {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.filter-tab {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+.filter-tab.active {
+    background: linear-gradient(135deg, var(--frost-blue), var(--frost-purple));
+    color: white;
+    border-color: transparent;
+}
+
+.filter-tab:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+
+.sort-select {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    cursor: pointer;
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+/* Idea Card */
+.idea-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    transition: all var(--transition-fast);
+    cursor: pointer;
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Fix for select elements with white text on white background */
+.theme-select {
+    background-color: var(--dark-card);
+    color: var(--text-primary);
+    border: 1px solid var(--dark-border);
+    position: relative;
+    z-index: 10; /* Ensure dropdown is above other elements */
+}
+
+.theme-select option {
+    background-color: var(--dark-card);
+    color: var(--text-primary);
+}
+
+/* Fix elongated and bugged checkbox for internships */
+.checkbox-label input.custom-checkbox {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    vertical-align: middle;
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: var(--glass-bg);
+    border: 2px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    position: relative;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+.checkbox-label input.custom-checkbox:checked {
+    background-color: var(--frost-blue);
+    border-color: var(--frost-blue);
+}
+
+.checkbox-label input.custom-checkbox:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: var(--font-size-sm);
+    font-weight: bold;
+}
+
+.checkbox-label .checkbox-custom {
+    display: none;
+}
+
+/* Fix profile dropdown overlap with navbar */
+.profile-dropdown {
+    z-index: 1100; /* Higher than navbar z-index 1000 */
+    position: absolute;
+}
+
+/* Fix sort select dropdown clipping */
+#sortSelect {
+    position: relative;
+    z-index: 10;
+}
+
+.idea-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--frost-blue);
+    box-shadow: 0 8px 25px rgba(96, 165, 250, 0.2);
+}
+
+.idea-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-lg);
+}
+
+.idea-user {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.idea-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--frost-blue), var(--frost-purple));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+    box-shadow: var(--glass-shadow);
+}
+
+.idea-user-info h4 {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-primary);
+}
+
+.idea-user-info p {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.verified-badge {
+    color: var(--frost-blue);
+    margin-left: var(--spacing-xs);
+}
+
+.idea-status {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-pending {
+    background: var(--warning-yellow);
+    color: white;
+}
+
+.status-approved {
+    background: var(--success-green);
+    color: white;
+}
+
+.status-rejected {
+    background: var(--error-red);
+    color: white;
+}
+
+.idea-title {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+    line-height: 1.3;
+}
+
+.idea-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-lg);
+}
+
+.idea-categories {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+.category-tag {
+    background: var(--glass-bg);
+    color: var(--frost-blue);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    border: 1px solid var(--glass-border);
+    backdrop-filter: var(--glass-backdrop);
+}
+
+.idea-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--glass-border);
+}
+
+.idea-stats {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.stat-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+.stat-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+
+.stat-btn.upvoted {
+    color: var(--success-green);
+    border-color: var(--success-green);
+}
+
+.stat-btn.downvoted {
+    color: var(--error-red);
+    border-color: var(--error-red);
+}
+
+.idea-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.action-btn {
+    padding: var(--spacing-sm);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+.action-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-normal);
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: scale(0.9);
+    transition: all var(--transition-normal);
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+.modal-overlay.show .modal {
+    transform: scale(1);
+}
+
+.modal-header {
+    padding: var(--spacing-xl);
+    border-bottom: 1px solid var(--glass-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: var(--font-size-2xl);
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+
+.modal-body {
+    padding: var(--spacing-xl);
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    background: var(--glass-bg);
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+    transition: all var(--transition-fast);
+    backdrop-filter: var(--glass-backdrop);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--frost-blue);
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.checkbox-custom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    position: relative;
+    transition: all var(--transition-fast);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+}
+
+.checkbox-label input:checked + .checkbox-custom {
+    background: var(--frost-blue);
+    border-color: var(--frost-blue);
+}
+
+.checkbox-label input:checked + .checkbox-custom::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: var(--font-size-sm);
+    font-weight: bold;
+}
+
+.form-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: flex-end;
+    margin-top: var(--spacing-xl);
+}
+
+/* Auth Pages */
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--dark-bg);
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(96, 165, 250, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(167, 139, 250, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+}
+
+.auth-container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    min-height: 600px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+.auth-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg,
+        rgba(96, 165, 250, 0.1) 0%,
+        rgba(167, 139, 250, 0.1) 50%,
+        rgba(6, 182, 212, 0.1) 100%
+    );
+    z-index: -1;
+}
+
+.auth-left {
+    flex: 1;
+    padding: var(--spacing-3xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(167, 139, 250, 0.1));
+    border-right: 1px solid var(--glass-border);
+}
+
+.auth-branding {
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.auth-branding .logo-icon {
+    width: 80px;
+    height: 80px;
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-lg);
+}
+
+.auth-branding h1 {
+    font-size: var(--font-size-4xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+}
+
+.auth-branding p {
+    font-size: var(--font-size-lg);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.auth-stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xl);
+}
+
+.auth-stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--frost-blue);
+    margin-bottom: var(--spacing-xs);
+}
+
+.stat-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.auth-right {
+    flex: 1;
+    padding: var(--spacing-3xl);
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-tabs {
+    display: flex;
+    margin-bottom: var(--spacing-2xl);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.auth-tab {
+    flex: 1;
+    padding: var(--spacing-md);
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border-bottom: 2px solid transparent;
+}
+
+.auth-tab.active {
+    color: var(--frost-blue);
+    border-bottom-color: var(--frost-blue);
+}
+
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.auth-form h2 {
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+}
+
+.auth-form p {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xl);
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.forgot-link,
+.terms-link {
+    color: var(--frost-blue);
+    text-decoration: none;
+}
+
+.forgot-link:hover,
+.terms-link:hover {
+    text-decoration: underline;
+}
+
+.btn-full {
+    width: 100%;
+    justify-content: center;
+    margin-top: var(--spacing-lg);
+}
+
+.auth-divider {
+    text-align: center;
+    margin: var(--spacing-xl) 0;
+    color: var(--text-secondary);
+    position: relative;
+}
+
+.auth-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--glass-border);
+}
+
+.auth-divider span {
+    background: var(--glass-bg);
+    padding: 0 var(--spacing-md);
+    backdrop-filter: var(--glass-backdrop);
+}
+
+.social-login {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.social-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+.social-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--frost-blue);
+}
+
+.social-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.auth-back {
+    text-align: center;
+    margin-top: var(--spacing-xl);
+}
+
+.back-link {
+    color: var(--frost-blue);
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* Profile Pages */
+.profile-header-section {
+    background: var(--glass-bg);
+    border-bottom: 1px solid var(--glass-border);
+    padding: var(--spacing-2xl) 0;
+    backdrop-filter: var(--glass-backdrop);
+}
+
+.profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-xl);
+}
+
+.profile-header-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2xl);
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+.profile-avatar-section {
+    text-align: center;
+}
+
+.profile-avatar-xl {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--frost-blue), var(--frost-purple));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-4xl);
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    box-shadow: var(--glass-shadow);
+}
+
+.profile-info-section h1 {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-primary);
+}
+
+.profile-role {
+    font-size: var(--font-size-lg);
+    color: var(--frost-blue);
+    margin-bottom: var(--spacing-xs);
+}
+
+.profile-email {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
+}
+
+.profile-stats {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.profile-stat {
+    text-align: center;
+}
+
+.profile-stat .stat-number {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--frost-blue);
+    margin-bottom: var(--spacing-xs);
+}
+
+.profile-stat .stat-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+/* Admin Panel Styles */
+.admin-header {
+    background: var(--glass-bg);
+    border-bottom: 1px solid var(--glass-border);
+    padding: var(--spacing-2xl) 0;
+    backdrop-filter: var(--glass-backdrop);
+}
+
+.admin-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-xl);
+}
+
+.admin-header h1 {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+}
+
+.admin-header p {
+    color: var(--text-secondary);
+}
+
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.admin-stat-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.stat-icon.users {
+    background: linear-gradient(135deg, var(--frost-blue), var(--frost-purple));
+}
+
+.stat-icon.ideas {
+    background: linear-gradient(135deg, var(--frost-purple), var(--frost-cyan));
+}
+
+.stat-icon.pending {
+    background: linear-gradient(135deg, var(--warning-yellow), var(--primary-orange));
+}
+
+.stat-icon.verified {
+    background: linear-gradient(135deg, var(--success-green), var(--frost-blue));
+}
+
+.admin-tabs {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.admin-tab {
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-bottom: none;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+.admin-tab.active {
+    background: linear-gradient(135deg, var(--frost-blue), var(--frost-purple));
+    color: white;
+    border-color: transparent;
+}
+
+.admin-tab-content {
+    display: none;
+}
+
+.admin-tab-content.active {
+    display: block;
+}
+
+.admin-section {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.section-header h3 {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.admin-search input {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    backdrop-filter: var(--glass-backdrop);
+}
+
+.admin-table-container {
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: var(--spacing-md);
+    text-align: left;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.admin-table th {
+    background: rgba(255, 255, 255, 0.05);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.admin-table td {
+    color: var(--text-secondary);
+}
+
+.analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+}
+
+.analytics-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+}
+
+.analytics-card h4 {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin-bottom: var(--spacing-lg);
+    color: var(--text-primary);
+}
+
+.chart-placeholder {
+    height: 200px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+}
+
+.top-ideas-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.top-idea {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+}
+
+.rank {
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, var(--frost-blue), var(--frost-purple));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+}
+
+.idea-info h5 {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-primary);
+}
+
+.idea-info p {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.metrics-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+}
+
+.metric-label {
+    color: var(--text-secondary);
+}
+
+.metric-value {
+    font-weight: 600;
+    color: var(--frost-blue);
+}
+
+.settings-form {
+    display: grid;
+    gap: var(--spacing-lg);
+    max-width: 600px;
+}
+
+.maintenance-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .nav-container {
+        padding: 0 var(--spacing-lg);
+    }
+
+    .hero-title {
+        font-size: var(--font-size-4xl);
+    }
+
+    .hero-stats {
+        gap: var(--spacing-xl);
+    }
+
+    .content-controls {
+        flex-direction: column;
+        gap: var(--spacing-lg);
+        align-items: stretch;
+    }
+
+    .filter-tabs {
+        justify-content: center;
+    }
+
+    .profile-header-card {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-center {
+        display: none;
+    }
+
+    .hero-title {
+        font-size: var(--font-size-3xl);
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        gap: var(--spacing-lg);
+    }
+
+    .stat-item {
+        justify-content: center;
+    }
+
+    .auth-container {
+        flex-direction: column;
+        margin: var(--spacing-lg);
+    }
+
+    .auth-left {
+        border-right: none;
+        border-bottom: 1px solid var(--glass-border);
+    }
+
+    .profile-tabs {
+        flex-wrap: wrap;
+    }
+
+    .admin-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .analytics-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-actions {
+        gap: var(--spacing-sm);
+    }
+
+    .btn-post-idea span {
+        display: none;
+    }
+
+    .hero-title {
+        font-size: var(--font-size-2xl);
+    }
+
+    .section-title {
+        font-size: var(--font-size-2xl);
+    }
+
+    .modal {
+        width: 95%;
+        margin: var(--spacing-md);
+    }
+
+    .profile-stats {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+}
+
+/* Dark theme adjustments */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --glass-bg: rgba(255, 255, 255, 0.08);
+        --glass-border: rgba(255, 255, 255, 0.15);
+        --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Light theme support */
+.light-theme {
+    --dark-bg: #F8FAFC;
+    --dark-card: rgba(255, 255, 255, 0.9);
+    --dark-border: rgba(0, 0, 0, 0.1);
+    --text-primary: #1A202C;
+    --text-secondary: #4A5568;
+    --text-muted: #718096;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(0, 0, 0, 0.1);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.light-theme body {
+    background: var(--dark-bg);
+    color: var(--text-primary);
+}
+
+/* Animation utilities */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.slide-up {
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading states */
+.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Notification styles */
+.notification {
+    position: fixed;
+    top: 100px;
+    right: var(--spacing-xl);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--glass-shadow);
+    z-index: 3000;
+    transform: translateX(400px);
+    transition: transform var(--transition-normal);
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification.success {
+    border-color: var(--success-green);
+    color: var(--success-green);
+}
+
+.notification.error {
+    border-color: var(--error-red);
+    color: var(--error-red);
+}
+
+.notification.warning {
+    border-color: var(--warning-yellow);
+    color: var(--warning-yellow);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--glass-bg);
+    border-radius: var(--radius-md);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Focus styles for accessibility */
+*:focus {
+    outline: 2px solid var(--frost-blue);
+    outline-offset: 2px;
+}
+
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+}
+
+/* Print styles */
+@media print {
+    .navbar,
+    .modal-overlay,
+    .notification {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    .idea-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+}
+
+    </style>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-icon">P</div>
+                <h2>PitchDesk</h2>
+            </div>
+
+            <div class="nav-center">
+                <div class="search-container">
+                    <input type="text" placeholder="Search startup ideas..." class="search-input" id="searchInput">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="nav-actions">
+                <button class="btn-post-idea" id="postIdeaBtn">
+                    <span>+</span>
+                    Post Idea
+                </button>
+                <div class="credits-badge">
+                    <span class="credits-count" id="creditsCount" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px);">95</span>
+                    <span class="credits-label">Credits</span>
+                </div>
+                <button class="icon-btn notification-btn" aria-label="Notifications">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9z"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                </button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    
+                    <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="translate: none; rotate: none; scale: none; transform: rotate(180deg);">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px);">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg></button>
+                <div class="profile-menu">
+                    <button class="profile-btn" id="profileBtn">
+                        <div class="profile-avatar"></div>
+                    </button>
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <div class="profile-header">
+                            <div class="profile-avatar large"></div>
+                            <div class="profile-info">
+                                <h4 id="userName">User</h4>
+                                <p id="userRole">Student</p>
+                            </div>
+                        </div>
+                        <div class="profile-menu-items">
+                            <a href="#profile" class="profile-menu-item">My Profile</a>
+                            <a href="#bookmarks" class="profile-menu-item">Bookmarks</a>
+                            <a href="#settings" class="profile-menu-item">Settings</a>
+                            <a href="#admin" class="profile-menu-item admin-only" style="display: none;">Admin Panel</a>
+                            <div class="profile-menu-divider"></div>
+                            <button class="profile-menu-item logout-btn" id="logoutBtn">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-container">
+            <div class="hero-badge" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+                <span class="live-indicator"></span>
+                Now Live at VIT Vellore
+            </div>
+
+            <h1 class="hero-title" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+                Where <span class="gradient-text">Startup Ideas</span><br>
+                Come to Life
+            </h1>
+
+            <p class="hero-subtitle" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+                The premier platform for VIT Vellore students to share, vote, and fund
+                innovative startup ideas. Connect with like-minded entrepreneurs and
+                turn your vision into reality.
+            </p>
+
+            <div class="hero-actions" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+                <button class="btn btn-primary" id="getStartedBtn">
+                    Get Started
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+                <button class="btn btn-secondary" id="exploreBtn">Explore Ideas</button>
+            </div>
+
+            <div class="hero-stats" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Active Students</div>
+                    </div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14.828 14.828a4 4 0 0 1-5.656 0"></path>
+                            <path d="M9 9a3 3 0 1 1 6 0 3 3 0 0 1-6 0"></path>
+                            <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number">1</div>
+                        <div class="stat-label">Ideas Shared</div>
+                    </div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number">85</div>
+                        <div class="stat-label">Funded Projects</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-container">
+            <div class="section-header">
+                <h2 class="section-title">Discover Amazing Startup Ideas</h2>
+                <p class="section-subtitle">
+                    Explore innovative ideas from VIT students, vote for your favorites, and help shape the
+                    future of technology.
+                </p>
+            </div>
+
+            <!-- Filters and Sorting -->
+            <div class="content-controls">
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">All Ideas</button>
+                    <button class="filter-tab" data-filter="open-innovation">Open Innovation</button>
+                    <button class="filter-tab" data-filter="verified-startups">Verified Startups</button>
+                </div>
+
+                <div class="sort-controls">
+                    <select class="sort-select" id="sortSelect">
+                        <option value="most-voted">Most Voted</option>
+                        <option value="newest">Newest</option>
+                        <option value="trending">Trending</option>
+                        <option value="oldest">Oldest</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Ideas Feed -->
+            <div class="ideas-feed" id="ideasFeed">
+            <div class="idea-card" data-id="1">
+                <div class="idea-header">
+                    <div class="idea-user">
+                        <div class="idea-avatar">R</div>
+                        <div class="idea-user-info">
+                            <h4>Rahul Kumar <span class="verified-badge">✓</span></h4>
+                            <p>615d ago • IoT, Sustainability, Energy</p>
+                        </div>
+                    </div>
+                    <div class="idea-status status-approved">
+                        Approved
+                    </div>
+                </div>
+
+                <h3 class="idea-title">Sustainable Energy Management for Hostels</h3>
+                <p class="idea-description">IoT-based energy monitoring and optimization system for VIT hostels. Track energy consumption, identify wastage, and gamify energy saving among students. Could potentially reduce campus energy costs by 30%.</p>
+
+                <div class="idea-categories">
+                    <span class="category-tag">IoT</span><span class="category-tag">Sustainability</span><span class="category-tag">Energy</span>
+                </div>
+
+                
+                    <div class="internship-banner">
+                        <span>🎯 Open for Internships</span>
+                        <p>Skills: IoT Development, Python, Data Analytics, Hardware Integration</p>
+                    </div>
+                
+
+                <div class="idea-footer">
+                    <div class="idea-stats">
+                        <button class="stat-btn upvote " data-action="upvote">
+                            ❤️ 156
+                        </button>
+                        <button class="stat-btn downvote " data-action="downvote">
+                            👎 3
+                        </button>
+                        <button class="stat-btn" data-action="comment">
+                            💬 45
+                        </button>
+                    </div>
+
+                    <div class="idea-actions">
+                        <button class="action-btn bookmark " data-action="bookmark">
+                            🔖
+                        </button>
+                        <button class="action-btn" data-action="share">
+                            📤
+                        </button>
+                        
+                            <button class="action-btn apply-internship" data-action="apply">
+                                Apply for Internship
+                            </button>
+                        
+
+<div class="razorpay-container" data-idea-id="1">
+    <a href="https://rzp.io/rzp/7Aze0ae" target="_blank" class="action-btn" style="text-decoration: none; display: inline-block; padding: 8px 12px; border-radius: 6px; background-color: #528FF0; color: white; font-weight: 500; text-align: center;">
+        💰 Fund this idea
+    </a>
+</div>
+
+
+                    </div>
+                </div>
+            </div>
+        
+            <div class="idea-card" data-id="2">
+                <div class="idea-header">
+                    <div class="idea-user">
+                        <div class="idea-avatar">P</div>
+                        <div class="idea-user-info">
+                            <h4>Priya Patel <span class="verified-badge">✓</span></h4>
+                            <p>616d ago • Logistics, Food, Campus</p>
+                        </div>
+                    </div>
+                    <div class="idea-status status-approved">
+                        Approved
+                    </div>
+                </div>
+
+                <h3 class="idea-title">Campus Food Delivery Optimization</h3>
+                <p class="idea-description">A smart delivery system that optimizes routes and reduces delivery time for food orders within VIT campus. Features include real-time tracking, bulk ordering for hostels, and integration with campus payment systems.</p>
+
+                <div class="idea-categories">
+                    <span class="category-tag">Logistics</span><span class="category-tag">Food</span><span class="category-tag">Campus</span>
+                </div>
+
+                
+                    <div class="internship-banner">
+                        <span>🎯 Open for Internships</span>
+                        <p>Skills: React Native, Node.js, MongoDB, GPS Integration</p>
+                    </div>
+                
+
+                <div class="idea-footer">
+                    <div class="idea-stats">
+                        <button class="stat-btn upvote " data-action="upvote">
+                            ❤️ 93
+                        </button>
+                        <button class="stat-btn downvote " data-action="downvote">
+                            👎 1
+                        </button>
+                        <button class="stat-btn" data-action="comment">
+                            💬 28
+                        </button>
+                    </div>
+
+                    <div class="idea-actions">
+                        <button class="action-btn bookmark " data-action="bookmark">
+                            🔖
+                        </button>
+                        <button class="action-btn" data-action="share">
+                            📤
+                        </button>
+                        
+                            <button class="action-btn apply-internship" data-action="apply">
+                                Apply for Internship
+                            </button>
+                        
+
+<div class="razorpay-container" data-idea-id="2">
+    <a href="https://rzp.io/rzp/7Aze0ae" target="_blank" class="action-btn" style="text-decoration: none; display: inline-block; padding: 8px 12px; border-radius: 6px; background-color: #528FF0; color: white; font-weight: 500; text-align: center;">
+        💰 Fund this idea
+    </a>
+</div>
+
+
+                    </div>
+                </div>
+            </div>
+        
+            <div class="idea-card" data-id="3">
+                <div class="idea-header">
+                    <div class="idea-user">
+                        <div class="idea-avatar">A</div>
+                        <div class="idea-user-info">
+                            <h4>Arjun Singh </h4>
+                            <p>617d ago • AI, Education, Machine Learning</p>
+                        </div>
+                    </div>
+                    <div class="idea-status status-pending">
+                        Pending
+                    </div>
+                </div>
+
+                <h3 class="idea-title">AI-Powered Study Assistant</h3>
+                <p class="idea-description">An intelligent study companion that helps VIT students with personalized learning paths, doubt solving, and exam preparation using advanced AI algorithms. Includes features like smart note-taking and progress tracking.</p>
+
+                <div class="idea-categories">
+                    <span class="category-tag">AI</span><span class="category-tag">Education</span><span class="category-tag">Machine Learning</span>
+                </div>
+
+                
+                    <div class="internship-banner">
+                        <span>🎯 Open for Internships</span>
+                        <p>Skills: Python, Machine Learning, React, Node.js</p>
+                    </div>
+                
+
+                <div class="idea-footer">
+                    <div class="idea-stats">
+                        <button class="stat-btn upvote " data-action="upvote">
+                            ❤️ 127
+                        </button>
+                        <button class="stat-btn downvote " data-action="downvote">
+                            👎 5
+                        </button>
+                        <button class="stat-btn" data-action="comment">
+                            💬 32
+                        </button>
+                    </div>
+
+                    <div class="idea-actions">
+                        <button class="action-btn bookmark " data-action="bookmark">
+                            🔖
+                        </button>
+                        <button class="action-btn" data-action="share">
+                            📤
+                        </button>
+                        
+                            <button class="action-btn apply-internship" data-action="apply">
+                                Apply for Internship
+                            </button>
+                        
+
+
+                    </div>
+                </div>
+            </div>
+        
+            <div class="idea-card" data-id="4">
+                <div class="idea-header">
+                    <div class="idea-user">
+                        <div class="idea-avatar">S</div>
+                        <div class="idea-user-info">
+                            <h4>Sneha Reddy </h4>
+                            <p>618d ago • Computer Vision, IoT, Campus Management</p>
+                        </div>
+                    </div>
+                    <div class="idea-status status-approved">
+                        Approved
+                    </div>
+                </div>
+
+                <h3 class="idea-title">Smart Parking Management System</h3>
+                <p class="idea-description">Computer vision-based parking management system for VIT campus. Real-time parking spot detection, reservation system, and automated billing. Could solve the chronic parking issues on campus.</p>
+
+                <div class="idea-categories">
+                    <span class="category-tag">Computer Vision</span><span class="category-tag">IoT</span><span class="category-tag">Campus Management</span>
+                </div>
+
+                
+
+                <div class="idea-footer">
+                    <div class="idea-stats">
+                        <button class="stat-btn upvote " data-action="upvote">
+                            ❤️ 89
+                        </button>
+                        <button class="stat-btn downvote " data-action="downvote">
+                            👎 2
+                        </button>
+                        <button class="stat-btn" data-action="comment">
+                            💬 19
+                        </button>
+                    </div>
+
+                    <div class="idea-actions">
+                        <button class="action-btn bookmark " data-action="bookmark">
+                            🔖
+                        </button>
+                        <button class="action-btn" data-action="share">
+                            📤
+                        </button>
+                        
+
+
+                    </div>
+                </div>
+            </div>
+        
+            <div class="idea-card" data-id="5">
+                <div class="idea-header">
+                    <div class="idea-user">
+                        <div class="idea-avatar">K</div>
+                        <div class="idea-user-info">
+                            <h4>Kiran Mehta <span class="verified-badge">✓</span></h4>
+                            <p>619d ago • Healthcare, Mental Health, Social Impact</p>
+                        </div>
+                    </div>
+                    <div class="idea-status status-approved">
+                        Approved
+                    </div>
+                </div>
+
+                <h3 class="idea-title">Mental Health Support Platform</h3>
+                <p class="idea-description">A comprehensive mental health support system specifically designed for college students with counseling, peer support, and wellness tracking. Includes anonymous posting and professional counseling integration.</p>
+
+                <div class="idea-categories">
+                    <span class="category-tag">Healthcare</span><span class="category-tag">Mental Health</span><span class="category-tag">Social Impact</span>
+                </div>
+
+                
+                    <div class="internship-banner">
+                        <span>🎯 Open for Internships</span>
+                        <p>Skills: Psychology background, React, Node.js, MongoDB</p>
+                    </div>
+                
+
+                <div class="idea-footer">
+                    <div class="idea-stats">
+                        <button class="stat-btn upvote " data-action="upvote">
+                            ❤️ 203
+                        </button>
+                        <button class="stat-btn downvote " data-action="downvote">
+                            👎 4
+                        </button>
+                        <button class="stat-btn" data-action="comment">
+                            💬 41
+                        </button>
+                    </div>
+
+                    <div class="idea-actions">
+                        <button class="action-btn bookmark " data-action="bookmark">
+                            🔖
+                        </button>
+                        <button class="action-btn" data-action="share">
+                            📤
+                        </button>
+                        
+                            <button class="action-btn apply-internship" data-action="apply">
+                                Apply for Internship
+                            </button>
+                        
+
+<div class="razorpay-container" data-idea-id="5">
+    <a href="https://rzp.io/rzp/7Aze0ae" target="_blank" class="action-btn" style="text-decoration: none; display: inline-block; padding: 8px 12px; border-radius: 6px; background-color: #528FF0; color: white; font-weight: 500; text-align: center;">
+        💰 Fund this idea
+    </a>
+</div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+
+    <!-- Post Idea Modal -->
+    <div class="modal-overlay" id="postIdeaModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Share Your Startup Idea</h2>
+                <button class="modal-close" id="closePostModal">×</button>
+            </div>
+            <div class="modal-body">
+                <form class="idea-form" id="ideaForm">
+                    <div class="form-group">
+                        <label for="ideaTitle">Idea Title</label>
+                        <input type="text" id="ideaTitle" placeholder="What's your brilliant idea?" required="">
+                    </div>
+                    <div class="form-group">
+                        <label for="ideaDescription">Description</label>
+                        <textarea id="ideaDescription" placeholder="Describe your idea in detail..." rows="6" required=""></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="ideaCategory">Category</label>
+                        <select id="ideaCategory" required="" class="theme-select">
+                            <option value="">Select a category</option>
+                            <option value="technology">Technology</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="education">Education</option>
+                            <option value="finance">Finance</option>
+                            <option value="sustainability">Sustainability</option>
+                            <option value="social">Social Impact</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ideaImage">Featured Image URL (optional)</label>
+                        <input type="url" id="ideaImage" placeholder="Enter image URL">
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="allowInternships" class="custom-checkbox">
+                            <span class="checkbox-custom"></span>
+                            Allow students to apply for internships
+                        </label>
+                    </div>
+                    <div class="internship-details" id="internshipDetails" style="display: none;">
+                        <div class="form-group">
+                            <label for="skillsRequired">Skills Required</label>
+                            <textarea id="skillsRequired" placeholder="List the skills needed for this internship..." rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="internshipDescription">Internship Description</label>
+                            <textarea id="internshipDescription" placeholder="Describe what interns will be working on..." rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelPost">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit for Review</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="modal-overlay" id="profileModal">
+        <div class="modal profile-modal">
+            <div class="modal-header">
+                <h2>My Profile</h2>
+                <button class="modal-close" id="closeProfileModal">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="profile-content">
+                    <div class="profile-section">
+                        <div class="profile-avatar-section">
+                            <div class="profile-avatar-xl" id="profileAvatar">U</div>
+                            <button class="btn btn-secondary" id="changeAvatarBtn">Change Avatar</button>
+                        </div>
+                        <div class="profile-details">
+                            <div class="form-group">
+                                <label for="profileName">Name</label>
+                                <input type="text" id="profileName" value="User">
+                            </div>
+                            <div class="form-group">
+                                <label for="profileEmail">Email</label>
+                                <input type="email" id="profileEmail" value="user@vit.ac.in">
+                            </div>
+                            <div class="form-group">
+                                <label for="profileBio">Bio</label>
+                                <textarea id="profileBio" placeholder="Tell us about yourself..." rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-section">
+                        <h3>Portfolio &amp; Social Links</h3>
+                        <div class="form-group">
+                            <label for="linkedinUrl">LinkedIn</label>
+                            <input type="url" id="linkedinUrl" placeholder="https://linkedin.com/in/username">
+                        </div>
+                        <div class="form-group">
+                            <label for="portfolioPdf">Portfolio PDF</label>
+                            <input type="file" id="portfolioPdf" accept=".pdf">
+                        </div>
+                    </div>
+                    <div class="profile-section">
+                        <h3>Bookmarks</h3>
+                        <div class="bookmarks-list" id="bookmarksList">
+                            <p class="empty-state">No bookmarks yet. Start exploring ideas!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>// PitchDesk - Main JavaScript File
+class PitchDesk {
+    constructor() {
+        this.currentUser = {
+            id: 1,
+            name: 'User',
+            role: 'student',
+            credits: 95,
+            bookmarks: [],
+            avatar: 'U'
+        };
+
+        this.ideas = this.getMockIdeas();
+        this.currentTheme = localStorage.getItem('theme') || 'dark';
+        this.currentFilter = 'all';
+
+        this.init();
+    }
+
+    init() {
+        this.setupEventListeners();
+        this.initializeTheme();
+        this.initializeGSAP();
+        this.renderIdeas();
+        this.updateCreditsDisplay();
+        this.updateUserDisplay();
+    }
+
+    setupEventListeners() {
+        // Theme toggle
+        document.getElementById('themeToggle').addEventListener('click', () => this.toggleTheme());
+
+        // Profile menu
+        document.getElementById('profileBtn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.toggleProfileMenu();
+        });
+
+        // Search
+        document.getElementById('searchInput').addEventListener('input', (e) => this.handleSearch(e));
+
+        // Post idea button
+        document.getElementById('postIdeaBtn').addEventListener('click', () => this.openPostModal());
+
+        // Get started button
+        document.getElementById('getStartedBtn').addEventListener('click', () => this.handleGetStarted());
+
+        // Explore button
+        document.getElementById('exploreBtn').addEventListener('click', () => this.scrollToIdeas());
+
+        // Filter tabs
+        document.querySelectorAll('.filter-tab').forEach(btn => {
+            btn.addEventListener('click', (e) => this.handleFilter(e));
+        });
+
+        // Sort select
+        document.getElementById('sortSelect').addEventListener('change', (e) => this.handleSort(e));
+
+        // Modal close handlers
+        document.getElementById('closePostModal').addEventListener('click', () => this.closePostModal());
+        document.getElementById('cancelPost').addEventListener('click', () => this.closePostModal());
+        document.getElementById('closeProfileModal').addEventListener('click', () => this.closeProfileModal());
+
+        // Profile menu items
+        document.getElementById('logoutBtn').addEventListener('click', () => this.handleLogout());
+
+        // Form submissions
+        document.getElementById('ideaForm').addEventListener('submit', (e) => this.handleIdeaSubmission(e));
+
+        // Internship checkbox
+        document.getElementById('allowInternships').addEventListener('change', (e) => this.toggleInternshipDetails(e));
+
+        // Click outside to close modals and dropdowns
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.profile-menu')) {
+                this.closeProfileMenu();
+            }
+            if (e.target.classList.contains('modal-overlay')) {
+                this.closeAllModals();
+            }
+        });
+    }
+
+    initializeTheme() {
+        document.documentElement.setAttribute('data-theme', this.currentTheme);
+        this.updateThemeIcon();
+    }
+
+    toggleTheme() {
+        this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', this.currentTheme);
+        localStorage.setItem('theme', this.currentTheme);
+        this.updateThemeIcon();
+
+        // GSAP animation for theme transition
+        gsap.to('body', {
+            duration: 0.3,
+            backgroundColor: this.currentTheme === 'dark' ? '#0A0E1A' : '#ffffff',
+            ease: 'power2.out'
+        });
+    }
+
+    updateThemeIcon() {
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+
+        if (this.currentTheme === 'dark') {
+            gsap.to(sunIcon, { rotation: 180, duration: 0.3 });
+            gsap.to(moonIcon, { rotation: 0, duration: 0.3 });
+        } else {
+            gsap.to(sunIcon, { rotation: 0, duration: 0.3 });
+            gsap.to(moonIcon, { rotation: -180, duration: 0.3 });
+        }
+    }
+
+    initializeGSAP() {
+        // Register ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero animations
+        gsap.from('.hero-badge', {
+            duration: 1,
+            y: 30,
+            opacity: 0,
+            ease: 'power3.out',
+            delay: 0.2
+        });
+
+        gsap.from('.hero-title', {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            ease: 'power3.out',
+            delay: 0.4
+        });
+
+        gsap.from('.hero-subtitle', {
+            duration: 1,
+            y: 30,
+            opacity: 0,
+            ease: 'power3.out',
+            delay: 0.6
+        });
+
+        gsap.from('.hero-actions', {
+            duration: 1,
+            y: 30,
+            opacity: 0,
+            ease: 'power3.out',
+            delay: 0.8
+        });
+
+        gsap.from('.hero-stats', {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            ease: 'power3.out',
+            delay: 1
+        });
+
+        // Stats counter animation
+        gsap.from('.stat-number', {
+            duration: 2,
+            textContent: 0,
+            ease: 'power2.out',
+            delay: 1.5,
+            snap: { textContent: 1 }
+        });
+
+        // Scroll animations
+        gsap.from('.idea-card', {
+            duration: 0.8,
+            y: 30,
+            opacity: 0,
+            stagger: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.ideas-feed',
+                start: 'top 80%'
+            }
+        });
+    }
+
+    toggleProfileMenu() {
+        const dropdown = document.getElementById('profileDropdown');
+        dropdown.classList.toggle('show');
+
+        if (dropdown.classList.contains('show')) {
+            gsap.fromTo(dropdown,
+                { opacity: 0, y: -10 },
+                { opacity: 1, y: 0, duration: 0.2, ease: 'power2.out' }
+            );
+        }
+    }
+
+    closeProfileMenu() {
+        const dropdown = document.getElementById('profileDropdown');
+        if (dropdown.classList.contains('show')) {
+            gsap.to(dropdown, {
+                opacity: 0,
+                y: -10,
+                duration: 0.2,
+                ease: 'power2.in',
+                onComplete: () => dropdown.classList.remove('show')
+            });
+        }
+    }
+
+    handleSearch(e) {
+        const query = e.target.value.toLowerCase();
+        const filteredIdeas = this.ideas.filter(idea =>
+            idea.title.toLowerCase().includes(query) ||
+            idea.description.toLowerCase().includes(query) ||
+            idea.author.toLowerCase().includes(query) ||
+            idea.category.toLowerCase().includes(query)
+        );
+
+        this.renderIdeas(filteredIdeas);
+    }
+
+    openPostModal() {
+        const modal = document.getElementById('postIdeaModal');
+        modal.classList.add('show');
+
+        gsap.fromTo('.modal',
+            { scale: 0.9, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.3, ease: 'power2.out' }
+        );
+    }
+
+    closePostModal() {
+        const modal = document.getElementById('postIdeaModal');
+        gsap.to('.modal', {
+            scale: 0.9,
+            opacity: 0,
+            duration: 0.2,
+            ease: 'power2.in',
+            onComplete: () => {
+                modal.classList.remove('show');
+                document.getElementById('ideaForm').reset();
+                document.getElementById('internshipDetails').style.display = 'none';
+            }
+        });
+    }
+
+    closeProfileModal() {
+        const modal = document.getElementById('profileModal');
+        gsap.to('.modal', {
+            scale: 0.9,
+            opacity: 0,
+            duration: 0.2,
+            ease: 'power2.in',
+            onComplete: () => modal.classList.remove('show')
+        });
+    }
+
+    closeAllModals() {
+        this.closePostModal();
+        this.closeProfileModal();
+    }
+
+    handleGetStarted() {
+        // Smooth scroll to ideas section
+        this.scrollToIdeas();
+
+        // Highlight the post idea button
+        const postBtn = document.getElementById('postIdeaBtn');
+        gsap.fromTo(postBtn,
+            { scale: 1 },
+            { scale: 1.05, duration: 0.2, yoyo: true, repeat: 1 }
+        );
+
+        // Open the post idea modal
+        this.openPostModal();
+    }
+
+    scrollToIdeas() {
+        const ideasSection = document.querySelector('.main-content');
+        if (ideasSection) {
+            gsap.to(window, {
+                duration: 1,
+                scrollTo: ideasSection,
+                ease: 'power3.inOut'
+            });
+        }
+    }
+
+    handleFilter(e) {
+        const filter = e.target.dataset.filter;
+
+        document.querySelectorAll('.filter-tab').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        e.target.classList.add('active');
+
+        this.currentFilter = filter;
+        this.renderIdeas();
+    }
+
+    handleSort(e) {
+        const sortBy = e.target.value;
+        let sortedIdeas = [...this.ideas];
+
+        switch (sortBy) {
+            case 'most-voted':
+                sortedIdeas.sort((a, b) => b.upvotes - a.upvotes);
+                break;
+            case 'newest':
+                sortedIdeas.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                break;
+            case 'trending':
+                sortedIdeas.sort((a, b) => (b.upvotes + b.comments) - (a.upvotes + a.comments));
+                break;
+            case 'oldest':
+                sortedIdeas.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+                break;
+        }
+
+        this.renderIdeas(sortedIdeas);
+    }
+
+    handleLogout() {
+        // Simple logout - in real app would clear tokens/sessions
+        this.closeProfileMenu();
+        this.showNotification('Logged out successfully', 'success');
+    }
+
+    handleIdeaSubmission(e) {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const ideaData = {
+            title: formData.get('ideaTitle') || document.getElementById('ideaTitle').value,
+            description: formData.get('ideaDescription') || document.getElementById('ideaDescription').value,
+            category: formData.get('ideaCategory') || document.getElementById('ideaCategory').value,
+            allowInternships: document.getElementById('allowInternships').checked,
+            skillsRequired: formData.get('skillsRequired') || document.getElementById('skillsRequired').value,
+            internshipDescription: formData.get('internshipDescription') || document.getElementById('internshipDescription').value,
+            author: this.currentUser.name,
+            authorId: this.currentUser.id,
+            createdAt: new Date().toISOString(),
+            status: 'pending',
+            upvotes: 0,
+            downvotes: 0,
+            comments: 0,
+            isVerified: this.currentUser.role === 'verified'
+        };
+
+        // Add to ideas array
+        this.ideas.unshift(ideaData);
+
+        // Close modal and show success
+        this.closePostModal();
+        this.showNotification('Idea submitted successfully! It will be reviewed by admins.', 'success');
+
+        // Re-render ideas
+        this.renderIdeas();
+    }
+
+    toggleInternshipDetails(e) {
+        const details = document.getElementById('internshipDetails');
+        if (e.target.checked) {
+            details.style.display = 'block';
+            gsap.fromTo(details,
+                { opacity: 0, height: 0 },
+                { opacity: 1, height: 'auto', duration: 0.3, ease: 'power2.out' }
+            );
+        } else {
+            gsap.to(details, {
+                opacity: 0,
+                height: 0,
+                duration: 0.3,
+                ease: 'power2.in',
+                onComplete: () => details.style.display = 'none'
+            });
+        }
+    }
+
+    renderIdeas(ideasToRender = null) {
+        const ideas = ideasToRender || this.ideas;
+        const feed = document.getElementById('ideasFeed');
+
+        // Filter by current filter
+        let filteredIdeas = ideas;
+        if (this.currentFilter === 'open-innovation') {
+            filteredIdeas = ideas.filter(idea => !idea.isVerified);
+        } else if (this.currentFilter === 'verified-startups') {
+            filteredIdeas = ideas.filter(idea => idea.isVerified);
+        }
+
+        if (filteredIdeas.length === 0) {
+            feed.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    No ideas found. Be the first to share your idea!
+                </div>
+            `;
+            return;
+        }
+
+        feed.innerHTML = filteredIdeas.map(idea => this.createIdeaCard(idea)).join('');
+
+        // Add event listeners to new cards
+        this.addIdeaCardListeners();
+    }
+
+    createIdeaCard(idea) {
+        const isBookmarked = this.currentUser.bookmarks.includes(idea.id);
+        const hasUpvoted = idea.upvotedBy?.includes(this.currentUser.id);
+        const hasDownvoted = idea.downvotedBy?.includes(this.currentUser.id);
+
+        return `
+            <div class="idea-card" data-id="${idea.id}">
+                <div class="idea-header">
+                    <div class="idea-user">
+                        <div class="idea-avatar">${idea.author.charAt(0)}</div>
+                        <div class="idea-user-info">
+                            <h4>${idea.author} ${idea.isVerified ? '<span class="verified-badge">✓</span>' : ''}</h4>
+                            <p>${this.formatDate(idea.createdAt)} • ${idea.category}</p>
+                        </div>
+                    </div>
+                    <div class="idea-status status-${idea.status}">
+                        ${idea.status.charAt(0).toUpperCase() + idea.status.slice(1)}
+                    </div>
+                </div>
+
+                <h3 class="idea-title">${idea.title}</h3>
+                <p class="idea-description">${idea.description}</p>
+
+                <div class="idea-categories">
+                    ${idea.category.split(',').map(cat => `<span class="category-tag">${cat.trim()}</span>`).join('')}
+                </div>
+
+                ${idea.allowInternships ? `
+                    <div class="internship-banner">
+                        <span>🎯 Open for Internships</span>
+                        <p>Skills: ${idea.skillsRequired || 'Not specified'}</p>
+                    </div>
+                ` : ''}
+
+                <div class="idea-footer">
+                    <div class="idea-stats">
+                        <button class="stat-btn upvote ${hasUpvoted ? 'upvoted' : ''}" data-action="upvote">
+                            ❤️ ${idea.upvotes}
+                        </button>
+                        <button class="stat-btn downvote ${hasDownvoted ? 'downvoted' : ''}" data-action="downvote">
+                            👎 ${idea.downvotes}
+                        </button>
+                        <button class="stat-btn" data-action="comment">
+                            💬 ${idea.comments}
+                        </button>
+                    </div>
+
+                    <div class="idea-actions">
+                        <button class="action-btn bookmark ${isBookmarked ? 'active' : ''}" data-action="bookmark">
+                            🔖
+                        </button>
+                        <button class="action-btn" data-action="share">
+                            📤
+                        </button>
+                        ${idea.allowInternships ? `
+                            <button class="action-btn apply-internship" data-action="apply">
+                                Apply for Internship
+                            </button>
+                        ` : ''}
+${idea.isVerified ? `
+<div class="razorpay-container" data-idea-id="${idea.id}">
+    <a href="https://rzp.io/rzp/7Aze0ae" target="_blank" class="action-btn" style="text-decoration: none; display: inline-block; padding: 8px 12px; border-radius: 6px; background-color: #528FF0; color: white; font-weight: 500; text-align: center;">
+        💰 Fund this idea
+    </a>
+</div>
+` : ''}
+
+                    </div>
+                </div>
+            </div>
+        `;
+
+    }
+
+    addIdeaCardListeners() {
+        // Upvote/Downvote
+        document.querySelectorAll('.stat-btn[data-action="upvote"], .stat-btn[data-action="downvote"]').forEach(btn => {
+            btn.addEventListener('click', (e) => this.handleVote(e));
+        });
+
+        // Bookmark
+        document.querySelectorAll('.action-btn[data-action="bookmark"]').forEach(btn => {
+            btn.addEventListener('click', (e) => this.handleBookmark(e));
+        });
+
+        // Share
+        document.querySelectorAll('.action-btn[data-action="share"]').forEach(btn => {
+            btn.addEventListener('click', (e) => this.handleShare(e));
+        });
+
+        // Apply for internship
+        document.querySelectorAll('.action-btn[data-action="apply"]').forEach(btn => {
+            btn.addEventListener('click', (e) => this.handleApply(e));
+        });
+
+        // Fund idea
+        document.querySelectorAll('.action-btn[data-action="fund"]').forEach(btn => {
+            btn.addEventListener('click', (e) => this.handleFund(e));
+        });
+
+        // Comment (placeholder)
+        document.querySelectorAll('.stat-btn[data-action="comment"]').forEach(btn => {
+            btn.addEventListener('click', (e) => this.showNotification('Comments feature coming soon!', 'info'));
+        });
+    }
+
+    handleVote(e) {
+        const btn = e.currentTarget;
+        const action = btn.dataset.action;
+        const card = btn.closest('.idea-card');
+        const ideaId = parseInt(card.dataset.id);
+
+        const idea = this.ideas.find(i => i.id === ideaId);
+        if (!idea) return;
+
+        // Check if user has enough credits
+        if (this.currentUser.credits <= 0) {
+            this.showNotification('Not enough credits to vote!', 'error');
+            return;
+        }
+
+        // Handle vote logic
+        if (action === 'upvote') {
+            if (idea.upvotedBy?.includes(this.currentUser.id)) {
+                // Remove upvote
+                idea.upvotes--;
+                idea.upvotedBy = idea.upvotedBy.filter(id => id !== this.currentUser.id);
+                btn.classList.remove('upvoted');
+            } else {
+                // Add upvote
+                idea.upvotes++;
+                idea.upvotedBy = idea.upvotedBy || [];
+                idea.upvotedBy.push(this.currentUser.id);
+                btn.classList.add('upvoted');
+
+                // Remove downvote if exists
+                if (idea.downvotedBy?.includes(this.currentUser.id)) {
+                    idea.downvotes--;
+                    idea.downvotedBy = idea.downvotedBy.filter(id => id !== this.currentUser.id);
+                    const downvoteBtn = card.querySelector('.downvote');
+                    downvoteBtn.classList.remove('downvoted');
+                }
+            }
+        } else if (action === 'downvote') {
+            if (idea.downvotedBy?.includes(this.currentUser.id)) {
+                // Remove downvote
+                idea.downvotes--;
+                idea.downvotedBy = idea.downvotedBy.filter(id => id !== this.currentUser.id);
+                btn.classList.remove('downvoted');
+            } else {
+                // Add downvote
+                idea.downvotes++;
+                idea.downvotedBy = idea.downvotedBy || [];
+                idea.downvotedBy.push(this.currentUser.id);
+                btn.classList.add('downvoted');
+
+                // Remove upvote if exists
+                if (idea.upvotedBy?.includes(this.currentUser.id)) {
+                    idea.upvotes--;
+                    idea.upvotedBy = idea.upvotedBy.filter(id => id !== this.currentUser.id);
+                    const upvoteBtn = card.querySelector('.upvote');
+                    upvoteBtn.classList.remove('upvoted');
+                }
+            }
+        }
+
+        // Deduct credit
+        this.currentUser.credits--;
+        this.updateCreditsDisplay();
+
+        // Update display
+        btn.innerHTML = btn.innerHTML.replace(/\d+/, action === 'upvote' ? idea.upvotes : idea.downvotes);
+
+        // Animation
+        gsap.fromTo(btn,
+            { scale: 1 },
+            { scale: 1.2, duration: 0.2, yoyo: true, repeat: 1 }
+        );
+    }
+
+    handleBookmark(e) {
+        const btn = e.currentTarget;
+        const card = btn.closest('.idea-card');
+        const ideaId = parseInt(card.dataset.id);
+
+        const ideaIndex = this.currentUser.bookmarks.indexOf(ideaId);
+
+        if (ideaIndex > -1) {
+            // Remove bookmark
+            this.currentUser.bookmarks.splice(ideaIndex, 1);
+            btn.classList.remove('active');
+        } else {
+            // Add bookmark
+            this.currentUser.bookmarks.push(ideaId);
+            btn.classList.add('active');
+        }
+
+        // Update bookmarks display
+        this.updateBookmarksDisplay();
+
+        // Animation
+        gsap.fromTo(btn,
+            { rotation: 0 },
+            { rotation: 360, duration: 0.5, ease: 'power2.out' }
+        );
+    }
+
+    handleShare(e) {
+        const card = e.currentTarget.closest('.idea-card');
+        const ideaId = parseInt(card.dataset.id);
+        const idea = this.ideas.find(i => i.id === ideaId);
+
+        if (navigator.share) {
+            navigator.share({
+                title: idea.title,
+                text: idea.description,
+                url: window.location.href
+            });
+        } else {
+            // Fallback - copy to clipboard
+            navigator.clipboard.writeText(`${idea.title} - ${window.location.href}`)
+                .then(() => this.showNotification('Link copied to clipboard!', 'success'))
+                .catch(() => this.showNotification('Could not copy link', 'error'));
+        }
+    }
+
+    handleApply(e) {
+        const card = e.currentTarget.closest('.idea-card');
+        const ideaId = parseInt(card.dataset.id);
+        const idea = this.ideas.find(i => i.id === ideaId);
+
+        // In a real app, this would open an application form
+        this.showNotification(`Application submitted for "${idea.title}" internship!`, 'success');
+    }
+
+    handleFund(e) {
+        // In a real app, this would integrate with Razorpay
+        this.showNotification('Redirecting to payment page...', 'info');
+        // window.location.href = 'razorpay-payment-link';
+    }
+
+    updateCreditsDisplay() {
+        const creditsCount = document.getElementById('creditsCount');
+        creditsCount.textContent = this.currentUser.credits;
+
+        // Animation
+        gsap.fromTo(creditsCount,
+            { scale: 1 },
+            { scale: 1.1, duration: 0.2, yoyo: true, repeat: 1 }
+        );
+    }
+
+    updateUserDisplay() {
+        document.getElementById('userName').textContent = this.currentUser.name;
+        document.getElementById('userRole').textContent = this.currentUser.role.charAt(0).toUpperCase() + this.currentUser.role.slice(1);
+        document.getElementById('profileAvatar').textContent = this.currentUser.avatar;
+
+        // Show admin panel option if user is admin
+        const adminMenuItem = document.querySelector('.admin-only');
+        if (this.currentUser.role === 'admin') {
+            adminMenuItem.style.display = 'block';
+        }
+    }
+
+    updateBookmarksDisplay() {
+        const bookmarksList = document.getElementById('bookmarksList');
+        const bookmarkedIdeas = this.ideas.filter(idea => this.currentUser.bookmarks.includes(idea.id));
+
+        if (bookmarkedIdeas.length === 0) {
+            bookmarksList.innerHTML = '<p class="empty-state">No bookmarks yet. Start exploring ideas!</p>';
+        } else {
+            bookmarksList.innerHTML = bookmarkedIdeas.map(idea =>
+                `<div class="bookmark-item">
+                    <h4>${idea.title}</h4>
+                    <p>${idea.author} • ${this.formatDate(idea.createdAt)}</p>
+                </div>`
+            ).join('');
+        }
+    }
+
+    showNotification(message, type = 'info') {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.textContent = message;
+
+        // Style the notification
+        Object.assign(notification.style, {
+            position: 'fixed',
+            top: '20px',
+            right: '20px',
+            padding: '12px 20px',
+            borderRadius: '8px',
+            color: 'white',
+            fontWeight: '500',
+            zIndex: '3000',
+            transform: 'translateX(100%)',
+            transition: 'transform 0.3s ease',
+            backgroundColor: type === 'success' ? '#10B981' :
+                type === 'error' ? '#EF4444' :
+                    type === 'warning' ? '#F59E0B' : '#4F46E5'
+        });
+
+        document.body.appendChild(notification);
+
+        // Animate in
+        gsap.to(notification, {
+            x: 0,
+            duration: 0.3,
+            ease: 'power2.out'
+        });
+
+        // Animate out and remove
+        setTimeout(() => {
+            gsap.to(notification, {
+                x: '100%',
+                duration: 0.3,
+                ease: 'power2.in',
+                onComplete: () => notification.remove()
+            });
+        }, 3000);
+    }
+
+    getMockIdeas() {
+        return [
+            {
+                id: 1,
+                title: 'Sustainable Energy Management for Hostels',
+                description: 'IoT-based energy monitoring and optimization system for VIT hostels. Track energy consumption, identify wastage, and gamify energy saving among students. Could potentially reduce campus energy costs by 30%.',
+                author: 'Rahul Kumar',
+                authorId: 2,
+                category: 'IoT, Sustainability, Energy',
+                createdAt: '2024-01-15T10:30:00Z',
+                status: 'approved',
+                upvotes: 156,
+                downvotes: 3,
+                comments: 45,
+                isVerified: true,
+                allowInternships: true,
+                skillsRequired: 'IoT Development, Python, Data Analytics, Hardware Integration',
+                internshipDescription: 'Work on IoT sensor deployment and energy optimization algorithms.'
+            },
+            {
+                id: 2,
+                title: 'Campus Food Delivery Optimization',
+                description: 'A smart delivery system that optimizes routes and reduces delivery time for food orders within VIT campus. Features include real-time tracking, bulk ordering for hostels, and integration with campus payment systems.',
+                author: 'Priya Patel',
+                authorId: 3,
+                category: 'Logistics, Food, Campus',
+                createdAt: '2024-01-14T14:20:00Z',
+                status: 'approved',
+                upvotes: 93,
+                downvotes: 1,
+                comments: 28,
+                isVerified: true,
+                allowInternships: true,
+                skillsRequired: 'React Native, Node.js, MongoDB, GPS Integration',
+                internshipDescription: 'Develop mobile app and optimize delivery routing algorithms.'
+            },
+            {
+                id: 3,
+                title: 'AI-Powered Study Assistant',
+                description: 'An intelligent study companion that helps VIT students with personalized learning paths, doubt solving, and exam preparation using advanced AI algorithms. Includes features like smart note-taking and progress tracking.',
+                author: 'Arjun Singh',
+                authorId: 4,
+                category: 'AI, Education, Machine Learning',
+                createdAt: '2024-01-13T09:15:00Z',
+                status: 'pending',
+                upvotes: 127,
+                downvotes: 5,
+                comments: 32,
+                isVerified: false,
+                allowInternships: true,
+                skillsRequired: 'Python, Machine Learning, React, Node.js',
+                internshipDescription: 'Develop AI models and user interfaces for the study assistant platform.'
+            },
+            {
+                id: 4,
+                title: 'Smart Parking Management System',
+                description: 'Computer vision-based parking management system for VIT campus. Real-time parking spot detection, reservation system, and automated billing. Could solve the chronic parking issues on campus.',
+                author: 'Sneha Reddy',
+                authorId: 5,
+                category: 'Computer Vision, IoT, Campus Management',
+                createdAt: '2024-01-12T16:45:00Z',
+                status: 'approved',
+                upvotes: 89,
+                downvotes: 2,
+                comments: 19,
+                isVerified: false,
+                allowInternships: false
+            },
+            {
+                id: 5,
+                title: 'Mental Health Support Platform',
+                description: 'A comprehensive mental health support system specifically designed for college students with counseling, peer support, and wellness tracking. Includes anonymous posting and professional counseling integration.',
+                author: 'Kiran Mehta',
+                authorId: 6,
+                category: 'Healthcare, Mental Health, Social Impact',
+                createdAt: '2024-01-11T11:30:00Z',
+                status: 'approved',
+                upvotes: 203,
+                downvotes: 4,
+                comments: 41,
+                isVerified: true,
+                allowInternships: true,
+                skillsRequired: 'Psychology background, React, Node.js, MongoDB',
+                internshipDescription: 'Work on developing the counseling platform and user experience design.'
+            }
+        ];
+    }
+
+    formatDate(dateString) {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diffInHours = Math.floor((now - date) / (1000 * 60 * 60));
+
+        if (diffInHours < 24) {
+            return `${diffInHours}h ago`;
+        } else {
+            const diffInDays = Math.floor(diffInHours / 24);
+            return `${diffInDays}d ago`;
+        }
+    }
+}
+
+// Initialize the application when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const app = new PitchDesk();
+});
+</script>
+
+</body></html>

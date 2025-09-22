@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,14 +7,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
-
 <body>
     <!-- Navigation -->
     <nav class="navbar">
@@ -51,8 +46,7 @@
                     </svg>
                 </button>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
+                    <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="5"></circle>
                         <line x1="12" y1="1" x2="12" y2="3"></line>
                         <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -63,8 +57,7 @@
                         <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
-                    <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
+                    <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                 </button>
@@ -86,7 +79,7 @@
                             <a href="#settings" class="profile-menu-item">Settings</a>
                             <a href="#admin" class="profile-menu-item admin-only" style="display: none;">Admin Panel</a>
                             <div class="profile-menu-divider"></div>
-                            <button class="profile-menu-item logout-btn" id="logoutBtn">Logout</button>
+                            <a href="/logout" class="profile-menu-item logout-btn" id="logoutBtn">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -115,13 +108,15 @@
             </p>
 
             <div class="hero-actions">
-                <a href="./login"><button class="btn btn-primary">
-                        Get Started
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14"></path>
-                            <path d="M12 5l7 7-7 7"></path>
-                        </svg>
-                    </button></a>
+                
+                <a href="/login" class="btn btn-primary" id="getStartedBtn">
+                    Get Started
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+                
                 <button class="btn btn-secondary" id="exploreBtn">Explore Ideas</button>
             </div>
 
@@ -146,9 +141,7 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M14.828 14.828a4 4 0 0 1-5.656 0"></path>
                             <path d="M9 9a3 3 0 1 1 6 0 3 3 0 0 1-6 0"></path>
-                            <path
-                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                            </path>
+                            <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                         </svg>
                     </div>
                     <div class="stat-content">
@@ -224,12 +217,11 @@
                     </div>
                     <div class="form-group">
                         <label for="ideaDescription">Description</label>
-                        <textarea id="ideaDescription" placeholder="Describe your idea in detail..." rows="6"
-                            required></textarea>
+                        <textarea id="ideaDescription" placeholder="Describe your idea in detail..." rows="6" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="ideaCategory">Category</label>
-                        <select id="ideaCategory" required class="theme-select">
+                        <select id="ideaCategory" required>
                             <option value="">Select a category</option>
                             <option value="technology">Technology</option>
                             <option value="healthcare">Healthcare</option>
@@ -241,12 +233,12 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="ideaImage">Featured Image URL (optional)</label>
-                        <input type="url" id="ideaImage" placeholder="Enter image URL">
+                        <label for="ideaImage">Featured Image (optional)</label>
+                        <input type="file" id="ideaImage" accept="image/*">
                     </div>
                     <div class="form-group checkbox-group">
                         <label class="checkbox-label">
-                            <input type="checkbox" id="allowInternships" class="custom-checkbox">
+                            <input type="checkbox" id="allowInternships">
                             <span class="checkbox-custom"></span>
                             Allow students to apply for internships
                         </label>
@@ -254,13 +246,11 @@
                     <div class="internship-details" id="internshipDetails" style="display: none;">
                         <div class="form-group">
                             <label for="skillsRequired">Skills Required</label>
-                            <textarea id="skillsRequired" placeholder="List the skills needed for this internship..."
-                                rows="3"></textarea>
+                            <textarea id="skillsRequired" placeholder="List the skills needed for this internship..." rows="3"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="internshipDescription">Internship Description</label>
-                            <textarea id="internshipDescription"
-                                placeholder="Describe what interns will be working on..." rows="3"></textarea>
+                            <textarea id="internshipDescription" placeholder="Describe what interns will be working on..." rows="3"></textarea>
                         </div>
                     </div>
                     <div class="form-actions">
@@ -324,6 +314,6 @@
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
 </body>
-
 </html>

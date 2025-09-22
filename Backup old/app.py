@@ -113,11 +113,6 @@ def signup():
         username = request.form.get('username')
         email = request.form.get('email')
         password = request.form.get('password')
-        full_name = request.form.get('full_name', '')
-        year_of_study = request.form.get('year_of_study', '')
-        department = request.form.get('department', '')
-        bio = request.form.get('bio', '')
-        linkedin = request.form.get('linkedin', '')
 
         # Check if user exists
         if User.query.filter_by(email=email).first():
@@ -128,13 +123,7 @@ def signup():
 
         # Create new user
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-        user = User(
-            username=username,
-            email=email,
-            password=hashed_password,
-            bio=bio,
-            linkedin=linkedin
-        )
+        user = User(username=username, email=email, password=hashed_password)
         db.session.add(user)
         db.session.commit()
 
@@ -338,58 +327,13 @@ def logout():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-
-        # Create demo users if they don't exist
+        # Create admin user if not exists
         admin = User.query.filter_by(role='admin').first()
         if not admin:
             hashed_password = bcrypt.generate_password_hash('admin123').decode('utf-8')
-            admin = User(
-                username='admin',
-                email='admin@pitchdesk.com',
-                password=hashed_password,
-                role='admin',
-                credits=999,
-                bio='System Administrator',
-                linkedin='https://linkedin.com/in/admin'
-            )
+            admin = User(username='admin', email='admin@pitchdesk.com', password=hashed_password, role='admin', credits=999)
             db.session.add(admin)
-            print("Admin user created: admin@pitchdesk.com / admin123")
-
-        # Create demo normal user
-        demo_user = User.query.filter_by(email='demo@pitchdesk.com').first()
-        if not demo_user:
-            hashed_password = bcrypt.generate_password_hash('demo123').decode('utf-8')
-            demo_user = User(
-                username='demo_user',
-                email='demo@pitchdesk.com',
-                password=hashed_password,
-                role='student',
-                credits=100,
-                bio='Demo user for testing the platform',
-                linkedin='https://linkedin.com/in/demo-user'
-            )
-            db.session.add(demo_user)
-            print("Demo user created: demo@pitchdesk.com / demo123")
-
-        # Create verified startup user
-        verified_user = User.query.filter_by(email='startup@pitchdesk.com').first()
-        if not verified_user:
-            hashed_password = bcrypt.generate_password_hash('startup123').decode('utf-8')
-            verified_user = User(
-                username='verified_startup',
-                email='startup@pitchdesk.com',
-                password=hashed_password,
-                role='verified',
-                credits=500,
-                bio='Verified startup founder',
-                linkedin='https://linkedin.com/in/startup-founder',
-                is_verified=True
-            )
-            db.session.add(verified_user)
-            print("Verified startup user created: startup@pitchdesk.com / startup123")
-
-        db.session.commit()
-        print("Demo users setup complete!")
+            db.session.commit()
 
     if not os.path.exists('uploads'):
         os.makedirs('uploads')

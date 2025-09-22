@@ -269,9 +269,6 @@ class PitchDesk {
             { scale: 1 },
             { scale: 1.05, duration: 0.2, yoyo: true, repeat: 1 }
         );
-
-        // Open the post idea modal
-        this.openPostModal();
     }
 
     scrollToIdeas() {
@@ -414,26 +411,21 @@ class PitchDesk {
                 <div class="idea-header">
                     <div class="idea-user">
                         <div class="idea-avatar">${idea.author.charAt(0)}</div>
-                        
                         <div class="idea-user-info">
+                            <h4>${idea.author} ${idea.isVerified ? '<span class="verified-badge">✓</span>' : ''}</h4>
                             <p>${this.formatDate(idea.createdAt)} • ${idea.category}</p>
                         </div>
-                        
                     </div>
-                    
                     <div class="idea-status status-${idea.status}">
                         ${idea.status.charAt(0).toUpperCase() + idea.status.slice(1)}
                     </div>
-                    
                 </div>
 
-                <h3 class="idea-title">${idea.title} ${idea.isVerified ? '<p class="verified-badge">©</p>' : ''}</h3>
-                
+                <h3 class="idea-title">${idea.title}</h3>
                 <p class="idea-description">${idea.description}</p>
 
                 <div class="idea-categories">
                     ${idea.category.split(',').map(cat => `<span class="category-tag">${cat.trim()}</span>`).join('')}
-                    
                 </div>
 
                 ${idea.allowInternships ? `
@@ -446,10 +438,10 @@ class PitchDesk {
                 <div class="idea-footer">
                     <div class="idea-stats">
                         <button class="stat-btn upvote ${hasUpvoted ? 'upvoted' : ''}" data-action="upvote">
-                            👍 ${idea.upvotes}
+                            ❤️ ${idea.upvotes}
                         </button>
                         <button class="stat-btn downvote ${hasDownvoted ? 'downvoted' : ''}" data-action="downvote">
-                            👇 ${idea.downvotes}
+                            👎 ${idea.downvotes}
                         </button>
                         <button class="stat-btn" data-action="comment">
                             💬 ${idea.comments}

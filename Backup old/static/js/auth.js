@@ -96,11 +96,9 @@ class AuthManager {
         const email = formData.get('email') || document.getElementById('signupEmail').value;
         const password = formData.get('password') || document.getElementById('signupPassword').value;
         const confirmPassword = formData.get('confirmPassword') || document.getElementById('confirmPassword').value;
-        const bio = formData.get('bio') || document.getElementById('signupBio').value;
-        const linkedin = formData.get('linkedin') || document.getElementById('signupLinkedin').value;
 
         if (!username || !email || !password || !confirmPassword) {
-            this.showNotification('Please fill in all required fields', 'error');
+            this.showNotification('Please fill in all fields', 'error');
             return;
         }
 
@@ -123,9 +121,7 @@ class AuthManager {
                 body: new URLSearchParams({
                     username: username,
                     email: email,
-                    password: password,
-                    bio: bio,
-                    linkedin: linkedin
+                    password: password
                 })
             });
 
