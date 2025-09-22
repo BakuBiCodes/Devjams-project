@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PitchDesk - Dashboard</title>
+    <title>PitchDesk - Where Startup Ideas Come to Life</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar">
@@ -36,7 +41,7 @@
                     Post Idea
                 </button>
                 <div class="credits-badge">
-                    <span class="credits-count" id="creditsCount">{{ current_user.credits }}</span>
+                    <span class="credits-count" id="creditsCount">95</span>
                     <span class="credits-label">Credits</span>
                 </div>
                 <button class="icon-btn notification-btn" aria-label="Notifications">
@@ -46,7 +51,8 @@
                     </svg>
                 </button>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
                         <circle cx="12" cy="12" r="5"></circle>
                         <line x1="12" y1="1" x2="12" y2="3"></line>
                         <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -57,31 +63,30 @@
                         <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
-                    <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                 </button>
                 <div class="profile-menu">
                     <button class="profile-btn" id="profileBtn">
-                        <div class="profile-avatar">{{ current_user.username[0].upper() }}</div>
+                        <div class="profile-avatar"></div>
                     </button>
                     <div class="profile-dropdown" id="profileDropdown">
                         <div class="profile-header">
-                            <div class="profile-avatar large">{{ current_user.username[0].upper() }}</div>
+                            <div class="profile-avatar large"></div>
                             <div class="profile-info">
-                                <h4>{{ current_user.username }}</h4>
-                                <p>{{ current_user.role.title() }}</p>
+                                <h4 id="userName">User</h4>
+                                <p id="userRole">Student</p>
                             </div>
                         </div>
                         <div class="profile-menu-items">
-                            <a href="/profile" class="profile-menu-item">My Profile</a>
-                            <a href="/bookmarks" class="profile-menu-item">Bookmarks</a>
-                            <a href="/settings" class="profile-menu-item">Settings</a>
-                            {% if current_user.role == 'admin' %}
-                            <a href="/admin" class="profile-menu-item admin-only">Admin Panel</a>
-                            {% endif %}
+                            <a href="#profile" class="profile-menu-item">My Profile</a>
+                            <a href="#bookmarks" class="profile-menu-item">Bookmarks</a>
+                            <a href="#settings" class="profile-menu-item">Settings</a>
+                            <a href="#admin" class="profile-menu-item admin-only" style="display: none;">Admin Panel</a>
                             <div class="profile-menu-divider"></div>
-                            <a href="/logout" class="profile-menu-item logout-btn">Logout</a>
+                            <button class="profile-menu-item logout-btn" id="logoutBtn">Logout</button>
                         </div>
                     </div>
                 </div>
@@ -110,13 +115,13 @@
             </p>
 
             <div class="hero-actions">
-                <button class="btn btn-primary" id="getStartedBtn">
-                    Get Started
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14"></path>
-                        <path d="M12 5l7 7-7 7"></path>
-                    </svg>
-                </button>
+                <a href="./login"><button class="btn btn-primary">
+                        Get Started
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14"></path>
+                            <path d="M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button></a>
                 <button class="btn btn-secondary" id="exploreBtn">Explore Ideas</button>
             </div>
 
@@ -141,7 +146,9 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M14.828 14.828a4 4 0 0 1-5.656 0"></path>
                             <path d="M9 9a3 3 0 1 1 6 0 3 3 0 0 1-6 0"></path>
-                            <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            <path
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                            </path>
                         </svg>
                     </div>
                     <div class="stat-content">
@@ -187,8 +194,8 @@
 
                 <div class="sort-controls">
                     <select class="sort-select" id="sortSelect">
-                        <option value="newest">Newest</option>
                         <option value="most-voted">Most Voted</option>
+                        <option value="newest">Newest</option>
                         <option value="trending">Trending</option>
                         <option value="oldest">Oldest</option>
                     </select>
@@ -210,35 +217,36 @@
                 <button class="modal-close" id="closePostModal">&times;</button>
             </div>
             <div class="modal-body">
-                <form class="idea-form" id="ideaForm" enctype="multipart/form-data">
+                <form class="idea-form" id="ideaForm">
                     <div class="form-group">
                         <label for="ideaTitle">Idea Title</label>
-                        <input type="text" id="ideaTitle" name="title" placeholder="What's your brilliant idea?" required>
+                        <input type="text" id="ideaTitle" placeholder="What's your brilliant idea?" required>
                     </div>
                     <div class="form-group">
                         <label for="ideaDescription">Description</label>
-                        <textarea id="ideaDescription" name="description" placeholder="Describe your idea in detail..." rows="6" required></textarea>
+                        <textarea id="ideaDescription" placeholder="Describe your idea in detail..." rows="6"
+                            required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="ideaCategory">Category</label>
-                        <select id="ideaCategory" name="category" required>
+                        <select id="ideaCategory" required class="theme-select">
                             <option value="">Select a category</option>
-                            <option value="Technology">Technology</option>
-                            <option value="Healthcare">Healthcare</option>
-                            <option value="Education">Education</option>
-                            <option value="Finance">Finance</option>
-                            <option value="Sustainability">Sustainability</option>
-                            <option value="Social Impact">Social Impact</option>
-                            <option value="Other">Other</option>
+                            <option value="technology">Technology</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="education">Education</option>
+                            <option value="finance">Finance</option>
+                            <option value="sustainability">Sustainability</option>
+                            <option value="social">Social Impact</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="ideaImage">Featured Image URL (optional)</label>
-                        <input type="url" id="ideaImage" name="image_url" placeholder="https://example.com/image.jpg">
+                        <input type="url" id="ideaImage" placeholder="Enter image URL">
                     </div>
                     <div class="form-group checkbox-group">
                         <label class="checkbox-label">
-                            <input type="checkbox" id="allowInternships" name="allow_internships">
+                            <input type="checkbox" id="allowInternships" class="custom-checkbox">
                             <span class="checkbox-custom"></span>
                             Allow students to apply for internships
                         </label>
@@ -246,23 +254,15 @@
                     <div class="internship-details" id="internshipDetails" style="display: none;">
                         <div class="form-group">
                             <label for="skillsRequired">Skills Required</label>
-                            <textarea id="skillsRequired" name="skills_required" placeholder="List the skills needed for this internship..." rows="3"></textarea>
+                            <textarea id="skillsRequired" placeholder="List the skills needed for this internship..."
+                                rows="3"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="internshipDescription">Internship Description</label>
-                            <textarea id="internshipDescription" name="internship_description" placeholder="Describe what interns will be working on..." rows="3"></textarea>
+                            <textarea id="internshipDescription"
+                                placeholder="Describe what interns will be working on..." rows="3"></textarea>
                         </div>
                     </div>
-
-                    <!-- Funding checkbox - only for verified users -->
-                    <div class="form-group checkbox-group" id="fundingSection" style="display: none;">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="enableFunding" name="enable_funding">
-                            <span class="checkbox-custom"></span>
-                            Enable funding for this project
-                        </label>
-                    </div>
-
                     <div class="form-actions">
                         <button type="button" class="btn btn-secondary" id="cancelPost">Cancel</button>
                         <button type="submit" class="btn btn-primary">Submit for Review</button>
@@ -272,6 +272,58 @@
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    <!-- Profile Modal -->
+    <div class="modal-overlay" id="profileModal">
+        <div class="modal profile-modal">
+            <div class="modal-header">
+                <h2>My Profile</h2>
+                <button class="modal-close" id="closeProfileModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="profile-content">
+                    <div class="profile-section">
+                        <div class="profile-avatar-section">
+                            <div class="profile-avatar-xl" id="profileAvatar">U</div>
+                            <button class="btn btn-secondary" id="changeAvatarBtn">Change Avatar</button>
+                        </div>
+                        <div class="profile-details">
+                            <div class="form-group">
+                                <label for="profileName">Name</label>
+                                <input type="text" id="profileName" value="User">
+                            </div>
+                            <div class="form-group">
+                                <label for="profileEmail">Email</label>
+                                <input type="email" id="profileEmail" value="user@vit.ac.in">
+                            </div>
+                            <div class="form-group">
+                                <label for="profileBio">Bio</label>
+                                <textarea id="profileBio" placeholder="Tell us about yourself..." rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-section">
+                        <h3>Portfolio & Social Links</h3>
+                        <div class="form-group">
+                            <label for="linkedinUrl">LinkedIn</label>
+                            <input type="url" id="linkedinUrl" placeholder="https://linkedin.com/in/username">
+                        </div>
+                        <div class="form-group">
+                            <label for="portfolioPdf">Portfolio PDF</label>
+                            <input type="file" id="portfolioPdf" accept=".pdf">
+                        </div>
+                    </div>
+                    <div class="profile-section">
+                        <h3>Bookmarks</h3>
+                        <div class="bookmarks-list" id="bookmarksList">
+                            <p class="empty-state">No bookmarks yet. Start exploring ideas!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
+
 </html>

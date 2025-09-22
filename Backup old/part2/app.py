@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
@@ -176,18 +175,6 @@ def admin():
     return render_template('admin.html')
 
 # API Routes
-@app.route('/api/user', methods=['GET'])
-@login_required
-def get_user():
-    return jsonify({
-        'id': current_user.id,
-        'username': current_user.username,
-        'email': current_user.email,
-        'role': current_user.role,
-        'credits': current_user.credits,
-        'is_verified': current_user.is_verified
-    })
-
 @app.route('/api/ideas', methods=['GET'])
 @login_required
 def get_ideas():
@@ -316,7 +303,6 @@ def post_idea():
     allow_internships = request.form.get('allow_internships') == 'on'
     skills_required = request.form.get('skills_required', '')
     internship_description = request.form.get('internship_description', '')
-    enable_funding = request.form.get('enable_funding') == 'on'
 
     # Handle image upload
     image_filename = ''
@@ -335,8 +321,7 @@ def post_idea():
         allow_internships=allow_internships,
         skills_required=skills_required,
         internship_description=internship_description,
-        user_id=current_user.id,
-        status='pending'
+        user_id=current_user.id
     )
 
     db.session.add(idea)
@@ -403,87 +388,8 @@ if __name__ == '__main__':
             db.session.add(verified_user)
             print("Verified startup user created: startup@pitchdesk.com / startup123")
 
-        # Create demo ideas if they don't exist
-        existing_ideas = Idea.query.count()
-        if existing_ideas == 0:
-            # Get the verified startup user
-            startup_user = User.query.filter_by(email='startup@pitchdesk.com').first()
-
-            demo_ideas = [
-                {
-                    'title': 'Sustainable Energy Management for Hostels',
-                    'description': 'IoT-based energy monitoring and optimization system for VIT hostels. Track energy consumption, identify wastage, and gamify energy saving among students. Could potentially reduce campus energy costs by 30%.',
-                    'category': 'Technology',
-                    'user_id': startup_user.id,
-                    'status': 'approved',
-                    'upvotes': 156,
-                    'downvotes': 3,
-                    'comments': 45,
-                    'allow_internships': True,
-                    'skills_required': 'IoT Development, Python, Data Analytics, Hardware Integration',
-                    'internship_description': 'Work on IoT sensor deployment and energy optimization algorithms.'
-                },
-                {
-                    'title': 'Campus Food Delivery Optimization',
-                    'description': 'A smart delivery system that optimizes routes and reduces delivery time for food orders within VIT campus. Features include real-time tracking, bulk ordering for hostels, and integration with campus payment systems.',
-                    'category': 'Technology',
-                    'user_id': startup_user.id,
-                    'status': 'approved',
-                    'upvotes': 93,
-                    'downvotes': 1,
-                    'comments': 28,
-                    'allow_internships': True,
-                    'skills_required': 'React Native, Node.js, MongoDB, GPS Integration',
-                    'internship_description': 'Develop mobile app and optimize delivery routing algorithms.'
-                },
-                {
-                    'title': 'AI-Powered Study Assistant',
-                    'description': 'An intelligent study companion that helps VIT students with personalized learning paths, doubt solving, and exam preparation using advanced AI algorithms. Includes features like smart note-taking and progress tracking.',
-                    'category': 'Education',
-                    'user_id': demo_user.id,
-                    'status': 'pending',
-                    'upvotes': 127,
-                    'downvotes': 5,
-                    'comments': 32,
-                    'allow_internships': True,
-                    'skills_required': 'Python, Machine Learning, React, Node.js',
-                    'internship_description': 'Develop AI models and user interfaces for the study assistant platform.'
-                },
-                {
-                    'title': 'Smart Parking Management System',
-                    'description': 'Computer vision-based parking management system for VIT campus. Real-time parking spot detection, reservation system, and automated billing. Could solve the chronic parking issues on campus.',
-                    'category': 'Technology',
-                    'user_id': demo_user.id,
-                    'status': 'approved',
-                    'upvotes': 89,
-                    'downvotes': 2,
-                    'comments': 19,
-                    'allow_internships': False
-                },
-                {
-                    'title': 'Mental Health Support Platform',
-                    'description': 'A comprehensive mental health support system specifically designed for college students with counseling, peer support, and wellness tracking. Includes anonymous posting and professional counseling integration.',
-                    'category': 'Healthcare',
-                    'user_id': startup_user.id,
-                    'status': 'approved',
-                    'upvotes': 203,
-                    'downvotes': 4,
-                    'comments': 41,
-                    'allow_internships': True,
-                    'skills_required': 'Psychology background, React, Node.js, MongoDB',
-                    'internship_description': 'Work on developing the counseling platform and user experience design.'
-                }
-            ]
-
-            for idea_data in demo_ideas:
-                idea = Idea(**idea_data)
-                db.session.add(idea)
-
-            db.session.commit()
-            print("Demo ideas created successfully!")
-
         db.session.commit()
-        print("Demo users and ideas setup complete!")
+        print("Demo users setup complete!")
 
     if not os.path.exists('uploads'):
         os.makedirs('uploads')

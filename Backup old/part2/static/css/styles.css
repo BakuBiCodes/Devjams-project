@@ -367,7 +367,6 @@ body {
 }
 
 .profile-dropdown.show {
-    /* margin-top:50px; */
     opacity: 1;
     visibility: visible;
     transform: translateY(0);

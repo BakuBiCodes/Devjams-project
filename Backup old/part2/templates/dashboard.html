@@ -233,8 +233,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="ideaImage">Featured Image URL (optional)</label>
-                        <input type="url" id="ideaImage" name="image_url" placeholder="https://example.com/image.jpg">
+                        <label for="ideaImage">Featured Image (optional)</label>
+                        <input type="file" id="ideaImage" name="image" accept="image/*">
                     </div>
                     <div class="form-group checkbox-group">
                         <label class="checkbox-label">
@@ -253,16 +253,6 @@
                             <textarea id="internshipDescription" name="internship_description" placeholder="Describe what interns will be working on..." rows="3"></textarea>
                         </div>
                     </div>
-
-                    <!-- Funding checkbox - only for verified users -->
-                    <div class="form-group checkbox-group" id="fundingSection" style="display: none;">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="enableFunding" name="enable_funding">
-                            <span class="checkbox-custom"></span>
-                            Enable funding for this project
-                        </label>
-                    </div>
-
                     <div class="form-actions">
                         <button type="button" class="btn btn-secondary" id="cancelPost">Cancel</button>
                         <button type="submit" class="btn btn-primary">Submit for Review</button>
@@ -272,6 +262,6 @@
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
